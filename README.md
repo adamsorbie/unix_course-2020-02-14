@@ -22,12 +22,18 @@ Once installed, open the terminal and provide a username and password. To downlo
 
 `git clone https://github.com/adamsorbie/unix_course-2020-02-14.git`
 
-if that doesn't work then try: 
+if that doesn't work then you may need to install git first, you can do this by typing:
 
-`wget https://github.com/adamsorbie/unix_course-2020-02-14/archive/master.zip`
-then type (only if you used the second option):
+```
+sudo apt update
+```
 
-`unzip master.zip`
+followed by:
+
+```
+sudo apt install git`
+```
+then repeat the above command.
 
 # Background
 
@@ -40,29 +46,29 @@ analyses more reproducible.
 
 # The basic anatomy of a command line call
 
-Running a tool in the command line interface follows a simple
+Running a tool in the command line follows a simple
 pattern. At first you have to write the name of the command (if it is
-not globally installed it's precise location needs to be given - we
-will get to this later). Some programs additionally require
+not globally installed its precise location needs to be given - we
+will get to this later). Some command line tools require additional
 parameters. While the parameters are the requirement of the program
 the actual values we give are called arguments. There are two
-different ways how to pass those arguments to a program - via keywords
-parameter (also called named keywords, flags or options) or via
+different ways how to pass those arguments to a program - via keyword
+parameters (also called named keywords, flags or options) or via
 positional parameters.  The common pattern looks like this (`<>`
-indicates obligatory items, `[]` indicates optional items):
+indicates required items, `[]` indicates optional items):
 
 ```
 <program name> [keyword parameters] [positional parameters]
 ```
 
 An example is calling the program `ls` which lists the content of a
-directory. You can simply call it without any argument
+directory. You can call it without any argument
 
 ```
 $ ls
 ```
 
-or with one or more keyword argument
+or with one or more keyword arguments
 
 ```
 $ ls -l
@@ -75,16 +81,14 @@ or with one or more positional arguments
 $ ls test_folder
 ```
 
-or with one or more keyword and positional arguments
+or with both keyword and positional arguments
 
 ```
 $ ls -l test_folder
 ```
 
-The result of a command is written usually to the so called *standard
-output* of the shell which is the screen shown to you. We will later
-learn how to redirect this e.g. to the *standard input* of another
-program.
+The output of a command is written usually to the so called *standard
+output* of the shell which is shown on the screen when you call the command.
 
 # How to get help
 
@@ -141,7 +145,7 @@ $ pwd
 
 On WSL, the output of `pwd` should be `/home/username`, yours
 may differ slightly however. The next command we need is `ls`. 
-This commaand simply lists the contents of a folder. 
+This command simply lists the contents of a folder. 
 If you call it without any arguments it will output the content
 of the current folder. We can use the `ls` command to get a rough overview 
 of what a common Unix file system tree looks like and learn how to address
@@ -162,27 +166,29 @@ Most of these folders are not particularly important for you right now.
 Those are more important if you are the administrator of the system. 
 Normal users do not have the permission to make changes here. 
 Currently your home directory is where you will work today and
-often where you will do most of your work in general. In here we will
-learn how work with paths. A file or folder can be addressed
-either with its *absolute* or *relative path*. As you have
+probably where you will end up doing most of your work in future. In here we 
+will learn how work with paths. A file or folder can be addressed
+by its *absolute* or its *relative path*. As you have
 downloaded the github repo containing todays course materials, when you type `ls` 
 you should see a folder with the name of todays course. 
-Assuming you are in this
-folder (`/home/ubuntu/`) the relative path to the folder is simply
-`unix_course_files`. You can get the content of the folder listed by
+Assuming you are in the home folder (`/home/yourusername/`) the relative path to 
+the folder is `unix_course-2020-02-14`. You can see what's inside the folder by
 calling `ls` like this:
 
 ```
-$ ls unix_course_files
+$ ls unix_course-2020-02-14
 ```
    
-This is the so called *relative path* as it is relative to the current work
-directory `/home/ubuntu/`. The *absolute path* would start with a `/`
-and is `/home/ubuntu/unix_course_files`. Call `ls` like this:
+This is the so called *relative path* as it is relative to where you are right now 
+`/home/yourusername/` i.e. your current working directory. The *absolute path* or full path 
+starts with a `/` and is `/home/yourusername/unix_course-2020-02-14`. Call `ls` like this:
 
 ```
-$ ls /home/ubuntu/unix_course_files
+$ ls /home/yourusername/unix_course-2020-02-14
 ```
+You can think of it a little like being give a street address without the city or town. Gregor-Mendel Str. 2 
+may make sense to you if you are in Freising, however if you are located elsewhere you would also need to know
+in which place this street is located.
 
 There are some conventions regarding *relative* and *absolute paths*. One
 is that a dot (`.`) represents the current folder. The command
