@@ -1,12 +1,11 @@
 #### Adapted from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md
- 
+
 #### Adam Sorbie
 
 # to do
 
 * finish editing text
-* change genes.csv to something more relevant for target audience e.g. mapping file from 16S experiment 
-* include use case - extracting OTU sequences from fasta file 
+* include use case - extracting OTU sequences from fasta file
 * show example of script used for analysis like RNA seq and explain what's going on/see if people can work it out
 * add contents and link to each section
 
@@ -15,19 +14,19 @@
 Short Unix course 2020
 
 
-## Installation instructions 
+## Installation instructions
 
-To take part in this course you need to have a linux bash shell installed on your computer. Luckily Windows 10 has made this 1000x easier than it used to be and you can run an almost complete linux subsystem on your windows PC. 
+To take part in this course you need to have a linux bash shell installed on your computer. Luckily Windows 10 has made this 1000x easier than it used to be and you can run an almost complete linux subsystem on your windows PC.
 
-##### Easy install 
+##### Easy install
 
 Open a powershell (search for powershell in the search bar) as an administrator and copy and paste the following command:
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
-You will then be prompted to restart your computer. After booting up again, open the microsoft store app and search for your preferred linux distribution. We will be using Ubuntu for this course, so I would suggest using that but if you want to use another one that's also ok. 
+You will then be prompted to restart your computer. After booting up again, open the microsoft store app and search for your preferred linux distribution. We will be using Ubuntu for this course, so I would suggest using that but if you want to use another one that's also ok.
 
-Once installed, open the terminal and provide a username and password. To download the contents of this course type or copy paste the following into your terminal: 
+Once installed, open the terminal and provide a username and password. To download the contents of this course type or copy paste the following into your terminal:
 
 `git clone https://github.com/adamsorbie/unix_course-2020-02-14.git`
 
@@ -47,16 +46,16 @@ then repeat the above command.
 # Background
 
 In this short course you will learn the very basics of how to use the Unix
-shell. Most tools used in Bioinformatics are written for command line use and 
+shell. Most tools used in Bioinformatics are written for command line use and
 understanding how to use the shell will allow you to use these tools in your
-own research. Additionally, knowing a little bit of bash scripting is very 
-helpful for automating annoying, repetitive tasks and can help make your 
-analyses more reproducible. 
+own research. Additionally, knowing a little bit of bash scripting is very
+helpful for automating annoying, repetitive tasks and can help make your
+analyses more reproducible.
 
-# Course conventions 
+# Course conventions
 
 * Anytime you see a path with yourusername in it e.g. `/home/yourusername` please replace "yourusername" with
-  the username you chose for yourself during the installation. 
+  the username you chose for yourself during the installation.
 
 
 
@@ -109,27 +108,27 @@ output* of the shell which is shown on the screen when you call the command.
 # How to get help
 
 Perhaps the most important command to know, although not particularly helpful if you don't
-understand anything yet, is `man` which stands for *manual*. Most commands have a manual 
-and `man` allows you to read those. Reading the manual should tell you what the command does and how to use it. 
+understand anything yet, is `man` which stands for *manual*. Most commands have a manual
+and `man` allows you to read those. Reading the manual should tell you what the command does and how to use it.
 For example, to get the man of `cd` type
 
 ```
 $ man cd
 ```
 
-To close the manual use `q`. Note some tools may offer help in a different way, common ones are 
+To close the manual use `q`. Note some tools may offer help in a different way, common ones are
 `-h`, `-help` or `--help`. For example `cd`:
 
 ```
 $ cd --help
 ```
 
-# Tab Completion 
+# Tab Completion
 
-One of the most useful things about bash is tab completion. Pressing Tab after typing the first 
-few letters of a command/file/folder will autocomplete it. Be aware that if there are multiple commands 
+One of the most useful things about bash is tab completion. Pressing Tab after typing the first
+few letters of a command/file/folder will autocomplete it. Be aware that if there are multiple commands
 or files starting with the same few letters then the bash shell will not know which one to choose. You can double press
-to reveal all of the options or just continue typing until the name is unique. Programmers are lazy, be lazy too. 
+to reveal all of the options or just continue typing until the name is unique. Programmers are lazy, be lazy too.
 
 * Tab - extend commands and file/folder names
 
@@ -146,7 +145,7 @@ Topics:
 * `cd`
 * `mkdir`
 * Relative vs. absolute path
-* `~/` 
+* `~/`
 
 In this part you will learn how to navigate through the Unix file system.
 
@@ -160,10 +159,10 @@ $ pwd
 ```
 
 On WSL, the output of `pwd` should be `/home/username`, yours
-may differ slightly however. The next command we need is `ls`. 
-This command simply lists the contents of a folder. 
+may differ slightly however. The next command we need is `ls`.
+This command simply lists the contents of a folder.
 If you call it without any arguments it will output the content
-of the current folder. We can use the `ls` command to get a rough overview 
+of the current folder. We can use the `ls` command to get a rough overview
 of what a common Unix file system tree looks like and learn how to address
 files and folders. The root folder of a system starts with `/`. Type
 
@@ -179,32 +178,32 @@ boot  dev   home lib64  media   opt  root  sbin  sys  usr
 ```
 
 Most of these folders are not particularly important for you right now.
-Those are more important if you are the administrator of the system. 
-Normal users do not have the permission to make changes here. 
+Those are more important if you are the administrator of the system.
+Normal users do not have the permission to make changes here.
 Currently your home directory is where you will work today and
-probably where you will end up doing most of your work in future. In here we 
+probably where you will end up doing most of your work in future. In here we
 will learn how work with paths. A file or folder can be addressed
 by its *absolute* or its *relative path*. As you have
-downloaded the github repo containing todays course materials, when you type `ls` 
-you should see a folder with the name of todays course. 
-Assuming you are in the home folder (`/home/yourusername/`) the relative path to 
+downloaded the github repo containing todays course materials, when you type `ls`
+you should see a folder with the name of todays course.
+Assuming you are in the home folder (`/home/yourusername/`) the relative path to
 the folder is `unix_course-2020-02-14`. You can see what's inside the folder by
 calling `ls` like this:
 
 ```
 $ ls unix_course-2020-02-14
 ```
-   
-This is the so called *relative path* as it is relative to where you are right now 
-`/home/yourusername/` i.e. your current working directory. The *absolute path* or full path 
+
+This is the so called *relative path* as it is relative to where you are right now
+`/home/yourusername/` i.e. your current working directory. The *absolute path* or full path
 starts with a `/` and is `/home/yourusername/unix_course-2020-02-14`. Call `ls` like this:
 
 ```
 $ ls /home/yourusername/unix_course-2020-02-14
 ```
-You can think of it a little like being give a street address without the city or town. Gregor-Mendel Str. 2 
+You can think of it a little like being give a street address without the city or town. Gregor-Mendel Str. 2
 may make sense to you if you are in Freising (*relative* to where you are), however if you are located elsewhere you would also need to know
-in which place this street is located. 
+in which place this street is located.
 
 There are some conventions regarding *relative* and *absolute paths*. One
 is that a dot (`.`) represents the current folder you are in. The command
@@ -232,17 +231,17 @@ $ ls ../../
 ```
 
 you should see the content of the parent folder of the parent folder which on
-a normal linux system is the root folder (`/`) assuming you are in `/home/yourusername/`. 
+a normal linux system is the root folder (`/`) assuming you are in `/home/yourusername/`.
 However, on WSL it should show the content of the home folder. Another
 convention is that `~/` represents the home directory of the user. The
 command
 
 ```
 $ ls ~/
-```   
+```
 should list the content of your home directory independent of where you are in the file system.
 
-Now we know where we are and what's there already we can start to move around the file system. 
+Now we know where we are and what's there already we can start to move around the file system.
 To do this we use the command `cd` (change directory). If
 you are in your home directory `/home/youruserbname/` you can go into the
 folder `unix_course-2020-02-14` by typing
@@ -254,11 +253,11 @@ $ cd unix_course-2020-02-14
 After that call `pwd` to make sure you're in the correct folder.
 
 ```
-$ pwd 
+$ pwd
 /home/yourusername/unix_course-2020-02-14
 ```
 
-To go back into your home directory you have a couple of different options. 
+To go back into your home directory you have a couple of different options.
 
 You could use the *absolute path*
 
@@ -272,7 +271,7 @@ or the above mentioned convention for the home directory `~/`:
 $ cd ~/
 ```
 
-or the *relative path*, in this case the parent directory of  
+or the *relative path*, in this case the parent directory of
 `/home/yourusername/unix_course-2020-02-14`:
 
 ```
@@ -319,10 +318,10 @@ Topics:
 * `touch`
 * `cp`
 * `mv`
-* `rm` 
+* `rm`
 
 Now we will learn how to manipulate files and folders. We can create some
-empty files `touch`. The main purpose of the `touch` command is actually to 
+empty files `touch`. The main purpose of the `touch` command is actually to
 change the time stamps of files but you can also use it to create empty files. Let's
 use touch to create a file called `test_file_1.txt`:
 
@@ -330,12 +329,12 @@ use touch to create a file called `test_file_1.txt`:
 $ touch test_file_1.txt
 ```
 
-Use `ls` to check it worked. 
+Use `ls` to check it worked.
 
-The `cp` command (*copy*) can be used to copy files or folders (**only with a specific flag**). 
+The `cp` command (*copy*) can be used to copy files or folders (**only with a specific flag**).
 For this it requires at least two arguments: the source and the target file. In
 the following example we generate a copy of the file `test_file_1.txt`
-called `a_copy_of_test_file.txt`. 
+called `a_copy_of_test_file.txt`.
 
 ```
 $ cp test_file_1.txt a_copy_of_test_file.txt
@@ -350,8 +349,8 @@ $ cp test_file_1.txt my_first_folder
 
 Now there should be also a file `test_file_1.txt` in the folder
 `my_first_folder`. If you want to copy a folder and its content you
-have to use the flag `-r`. The r stands for recursive, which you can think of 
-as repeatedly. 
+have to use the flag `-r`. The r stands for recursive, which you can think of
+as repeatedly.
 
 ```
 $ cp -r my_first_folder a_copy_of_my_first_folder
@@ -367,7 +366,7 @@ $ mv a_copy_of_test_file.txt test_file_with_new_name.txt
 
 With `mv` you can also move a file into a folder. For this the second
 argument must be a folder. For example, to move the file now named
-`test_file_with_new_name.txt` into the folder `my_first_folder` use 
+`test_file_with_new_name.txt` into the folder `my_first_folder` use
 
 ```
 $ mv test_file_with_new_name.txt my_first_folder
@@ -378,15 +377,15 @@ folder. Let's create and move two files `file1` and `file2` into the
 folder `my_first_folder`.
 
 ```
-$ touch file1 file2 
+$ touch file1 file2
 $ mv file1 file2 my_first_folder
 ```
 
 Now we can introduce another useful feature most shells offer
 called *globbing*. Imagine you want to apply the same
 command to several files. Instead of explicitly writing all the file
-names (which would take a lot of time) you can instead use a *globbing pattern* 
-to refer to all of them. There are different "wildcards" that can be used for these patterns. 
+names (which would take a lot of time) you can instead use a *globbing pattern*
+to refer to all of them. There are different "wildcards" that can be used for these patterns.
 The most important one is the asterisk (`*`). It can replace none, one or more
 characters. Let explain this with a quick example:
 
@@ -399,18 +398,18 @@ $ mv *txt my_first_folder
 The `ls` shows the two files matching the given pattern
 (i.e. `file1.txt` and `file2.txt`) while dismissing the one not
 matching (i.e. `file3`). In this case the `*` basically means match
-anything before txt. 
+anything before txt.
 
 Similarly for `mv` - it will only move the two
 files ending with `txt`.
 
-We now have several empty test files that we don't need anymore. The last command we 
+We now have several empty test files that we don't need anymore. The last command we
 will learn in this section is `rm` (*remove*) which allows you to delete files
-and folders. **Danger Ahead** there is no trash bin if you remove items using `rm`. 
-They will be gone for good and without further notice. It's good practice to use `rm -i`, 
-this flag askes before deleting a file, which can be a lifesaver. Note, once you are more 
-advanced and comfortable using a unix system you can modify the default behaviour of rm so 
-that it will always ask you before deleting. 
+and folders. **Danger Ahead** there is no trash bin if you remove items using `rm`.
+They will be gone for good and without further notice. It's good practice to use `rm -i`,
+this flag askes before deleting a file, which can be a lifesaver. Note, once you are more
+advanced and comfortable using a unix system you can modify the default behaviour of rm so
+that it will always ask you before deleting.
 
 To delete a file in `my_first_folder` call:
 
@@ -430,9 +429,9 @@ Alternatively you can use the command `rmdir`:
 $ rmdir my_first_folder
 ```
 
-However, keep in mind `rmdir` will only work on empty directories. 
+However, keep in mind `rmdir` will only work on empty directories.
 
-# File contents - Viewing and Editing files 
+# File contents - Viewing and Editing files
 
 Topics:
 
@@ -448,9 +447,9 @@ and look at some of the commands we can use for this. Please go into the folder 
 if you aren't already:
 
 
-You should see some files there already (*and by now you should know how to check). 
-To read the content of files with the ability to scroll around we need 
-a so called pager program. We will use the tool `less` which should be available on 
+You should see some files there already (*and by now you should know how to check).
+To read the content of files with the ability to scroll around we need
+a so called pager program. We will use the tool `less` which should be available on
 all of your systems. Let's start with the file:
 
 `origin_of_species.txt`
@@ -463,7 +462,7 @@ The file contains Charles Darwin's *Origin of species* in plain
 text. You can scroll up and down line-wise using the arrow keys or page-wise
 using the page-up/page-down keys. To quit use `q`. With
 pager programs you can read file content interactively, but sometimes
-you just need the content of a file. The command `cat` (*concatenate*) does just 
+you just need the content of a file. The command `cat` (*concatenate*) does just
 that for one or more files. Let us use it to see what is in the example file
 `lorem_ipsum.txt`. Assuming you are still in the folder `unix_course-2020-02-14`
 you can call
@@ -479,59 +478,61 @@ two files and the content is concatenated and returned:
 $ cat lorem_ipsum.txt lorem_ipsum_2.txt
 ```
 
-This is a good time to introduce the *standard input* and *standard
-output* and what you can do with it. You can redirect the *standard output* 
-into a file by using the `>` operator. Let us use the call above to generate a new file that contains
+This is a good time to introduce *standard input* and *standard
+output* and what you can do with them. Stdin is the standard input stream
+and accepts text as input. Stdout is the standard output stream, and as you might expect,
+outputs text. You can redirect the *standard output* into a file by using the `>` operator.
+Let try this to generate a new file that contains
 the combined content of both files:
 
 ```
 $ cat two_lines.txt three_lines.txt > five_lines.txt
 ```
 
-Please have a look at the content of this file:
+Use cat again to have a look at the content of this file
 
 ```
 $ cat five_lines.txt
 ```
 
-The *standard output* can also be redirected to other tools as
-*standard input*. More about this below. With `cat` we can reuse the
-existing file content. To create something new we use the command
-`echo` which writes a given string to the standard output.
+*standard output* can also be redirected to other tools as
+*standard input*. We will go into more detail a little later. With `cat` we used
+existing file content. To create something entirely new we can use the `echo` command
+which writes an input string to standard output.
 
 ```
-$ echo "Something very creative"
+$ echo "Linux is cool"
 ```
 
 To redirect the output into a target file use `>`.
 
 ```
-$ echo "Something very creative." > creative.txt
+$ echo "Linux is cool" > super_cool.txt
 ```
 
-Be aware that this can be dangerous. You will overwrite the content of an
+Please note that this can be dangerous. You can easily overwrite the content of an
 existing file. For example if you call now
 
 ```
-$ echo "Something very uncreative." > creative.txt
+$ echo "Linux is boring" > super_cool.txt
 ```
 
-there will be only the latest string written to the file and the
-previous one will be overwritten. To append the output of a command to a
-file without overwriting the content use `>>`.
+only the last string will be written to the file and the
+previous one will be overwritten (Worst of all the text in your file will be a lie ;) ).
+To append output of a command to a file without overwriting use `>>`.
 
 ```
-$ echo "Something very creative." > creative.txt
-$ echo "Something very uncreative." >> creative.txt
+$ echo "Linux is cool" > super_cool.txt
+$ echo "Adam is the best teacher" >> super_cool.txt
 ```
 
-Now `creative.txt` should contain two lines.
+Now your file should contain two lines
 
-Sometimes you just want to get an excerpt of a file e.g. just the
-first or last lines of it. For this the commands `head` and `tail` can
-be used. Per default 10 lines are shown. You can use the parameter `-n
+Often you just want part a file, for example just the
+first few or last few lines. For this the commands `head` and `tail` can
+be used. By default 10 lines are shown. You can use the parameter `-n
 <NUMBER>` (e.g. `-n 20` or just `-<NUMBER>` (e.g. `-20`) to specify the
-number of lines to be displayed. Test the tools with the file
+number of lines you want to be displayed. Test `head` and `tail` with the file
 `origin_of_species.txt`:
 
 ```
@@ -539,21 +540,25 @@ $ head origin_of_species.txt
 $ tail origin_of_species.txt
 ```
 
-You cannot only select vertically but also horizontally using the
-command `cut`. Let us extract only the first 10 characters of each line
+This is super useful if you want to look at large files (e.g. FASTQ), because you can't
+normally open them in a text editor.
+
+
+You can also extract text horizontally using the
+command `cut`. This is especially useful if you have a file with different columns.
+To see how this works lets extract the first 10 characters of each line
 in the file `origin_of_species.txt`:
 
 ```
 $ cut -c 1-10 origin_of_species.txt
 ```
 
-The tool `cut` can be very useful to extract certain columns from CSV
-files (*comma/character separated values*). Have a look at the content of the
-file `genes.csv`. You see that it contains different columns that are
+Lets now look at a more common usage (at least for me). Have a look at the content of the
+file `mapping_file.tab`. You see that it contains different columns that are
 tabular-separated. You can extract selected columns with `cut`:
 
 ```
-$ cut -f 1,4 genes.csv
+$ cut -f 1,4 mapping_file.tab
 ```
 
 # File content - part 2
@@ -638,7 +643,7 @@ and finally replace the `w`s by `m`s call (Please write this in one line
 in the shell and remove the `\`):
 
 ```
-$ head -n 1000 origin_of_species.txt | grep species \ 
+$ head -n 1000 origin_of_species.txt | grep species \
   | grep wild | tr w m
 ```
 
@@ -653,7 +658,7 @@ cp *txt copy_of_*txt
 would not work.
 
 With `for` loops you can solve this problem. Let's start with a simple
-one. 
+one.
 
 ```
 for FILE in three_lines.txt two_lines.txt
@@ -762,7 +767,4 @@ Number of lines that contains species:
  15322 origin_of_species.txt
       5 genes.csv
  15327 total
-```      
-
-
-
+```
