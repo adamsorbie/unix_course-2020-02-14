@@ -2,6 +2,14 @@
  
 #### Adam Sorbie
 
+# to do
+
+* finish editing text
+* change genes.csv to something more relevant for target audience e.g. mapping file from 16S experiment 
+* include use case - extracting OTU sequences from fasta file 
+* show example of script used for analysis like RNA seq and explain what's going on/see if people can work it out
+
+
 # unix_course-2020-02-14
 Short Unix course 2020
 
@@ -43,6 +51,13 @@ understanding how to use the shell will allow you to use these tools in your
 own research. Additionally, knowing a little bit of bash scripting is very 
 helpful for automating annoying, repetitive tasks and can help make your 
 analyses more reproducible. 
+
+# Course conventions 
+
+* Anytime you see a path with yourusername in it e.g. `/home/yourusername` please replace "yourusername" with
+  the username you chose for yourself during the installation. 
+
+
 
 # The basic anatomy of a command line call
 
@@ -187,23 +202,23 @@ starts with a `/` and is `/home/yourusername/unix_course-2020-02-14`. Call `ls` 
 $ ls /home/yourusername/unix_course-2020-02-14
 ```
 You can think of it a little like being give a street address without the city or town. Gregor-Mendel Str. 2 
-may make sense to you if you are in Freising, however if you are located elsewhere you would also need to know
-in which place this street is located.
+may make sense to you if you are in Freising (*relative* to where you are), however if you are located elsewhere you would also need to know
+in which place this street is located. 
 
 There are some conventions regarding *relative* and *absolute paths*. One
-is that a dot (`.`) represents the current folder. The command
+is that a dot (`.`) represents the current folder you are in. The command
 
 ```
 $ ls ./
 ```
 
-should return the same as simply calling
+should return the same as
 
 ```
 $ ls
 ```
 
-Two dots (`..`) represent the parent folder. If you call
+Two dots (`..`) represents the folder above your current working directory. If you call
 
 ```
 $ ls ../
@@ -215,39 +230,39 @@ you should see the content of `/home`. If you call
 $ ls ../../
 ```
 
-you should see the content of the parent folder of the parent folder which
-is the root folder (`/`) assuming you are in `/home/ubuntu/`. Another
+you should see the content of the parent folder of the parent folder which on
+a normal linux system is the root folder (`/`) assuming you are in `/home/yourusername/`. 
+However, on WSL it should show the content of the home folder. Another
 convention is that `~/` represents the home directory of the user. The
 command
 
 ```
 $ ls ~/
-```
-    
-should list the content of your home directory independent of your
-current location in the file system.
+```   
+should list the content of your home directory independent of where you are in the file system.
 
-Now as we know where we are and what is there we can start to change
-our location. For this we use the command `cd` (change directory). If
-you are in your home directory `/home/ubuntu/` you can go into the
-folder `unix_course_files` by typing
+Now we know where we are and what's there already we can start to move around the file system. 
+To do this we use the command `cd` (change directory). If
+you are in your home directory `/home/youruserbname/` you can go into the
+folder `unix_course-2020-02-14` by typing
 
 ```
-$ cd unix_course_files
+$ cd unix_course-2020-02-14
 ```
 
-After that call `pwd` to make sure that you are in the correct folder.
+After that call `pwd` to make sure you're in the correct folder.
 
 ```
 $ pwd 
-/home/ubuntu/unix_course_files
+/home/yourusername/unix_course-2020-02-14
 ```
 
-To go back into your home directory you have different options. Use
-the *absolute path*
+To go back into your home directory you have a couple of different options. 
+
+You could use the *absolute path*
 
 ```
-$ cd /home/ubuntu/
+$ cd /home/yourusername/
 ```
 
 or the above mentioned convention for the home directory `~/`:
@@ -257,36 +272,36 @@ $ cd ~/
 ```
 
 or the *relative path*, in this case the parent directory of  
-`/home/ubuntu/unix_course_files`:
+`/home/yourusername/unix_course-2020-02-14`:
 
 ```
 $ cd ../
 ```
 
-As the home directory is such an important place `cd` uses this as
-default argument. This means if you call `cd` without argument you will
-go to the home directory. Test this behavior by calling
+As the home directory is such an important place `cd` actually uses this as
+a default argument, thus if you just call `cd` without anything you will
+automatically go to the home directory. Test this behavior by calling
 
 ```
 $ cd
 ```
 
-Try now to go to different locations in the file system and list the
+You can try now to move around the file system yourself and list the
 files and folders located there.
 
-Now we will create our first folder using the command `mkdir` (*make
+Now we will create our own folder using the command `mkdir` (*make
 directory*). Go into the home directory and type:
 
 ```
 $ mkdir my_first_folder
 ```
 
-Here we can discuss the implementation of another Unix philosophy: "No
+In Unix and often many programming languages "No
 news is good news." The command successfully created the folder
-`my_first_folder`. You can check this by calling `ls`, but `mkdir` did
-not tell you this. If you do not get a message this usually means
-everything went fine. If you call the above `mkdir` command again you
-should get an error message like this:
+`my_first_folder`. You can check by calling `ls`, but `mkdir` did
+not tell you this. If you do not get a message this _usually_ means
+everything went fine. If you call the same `mkdir` command again you
+should get an error message:
 
 ```
 $ mkdir my_first_folder
@@ -305,28 +320,28 @@ Topics:
 * `mv`
 * `rm` 
 
-Next we want to manipulate files and folders. We create some dummy
-files using `touch` which is usually used to change the time stamps of
-files. But you can also create empty files with it easily. Let's
-create a file called `test_file_1.txt`:
+Now we will learn how to manipulate files and folders. We can create some
+empty files `touch`. The main purpose of the `touch` command is actually to 
+change the time stamps of files but you can also use it to create empty files. Let's
+use touch to create a file called `test_file_1.txt`:
 
 ```
 $ touch test_file_1.txt
 ```
 
-Use `ls` to check that it was created. 
+Use `ls` to check it worked. 
 
-The command `cp` (*copy*) can be used to copy files. For this it
-requires at least two arguments: the source and the target file. In
+The `cp` command (*copy*) can be used to copy files or folders (**only with a specific flag**). 
+For this it requires at least two arguments: the source and the target file. In
 the following example we generate a copy of the file `test_file_1.txt`
-called `a_copy_of_test_file.txt`.
+called `a_copy_of_test_file.txt`. 
 
 ```
 $ cp test_file_1.txt a_copy_of_test_file.txt
 ```
 
-Use `ls` to confirm that this worked. We can also copy the file in the
-folder `my_first_folder` which we have created above:
+Use `ls` to confirm that this worked. We can also copy the file to the folder we
+created earlier `my_first_folder` :
 
 ```
 $ cp test_file_1.txt my_first_folder
@@ -334,13 +349,14 @@ $ cp test_file_1.txt my_first_folder
 
 Now there should be also a file `test_file_1.txt` in the folder
 `my_first_folder`. If you want to copy a folder and its content you
-have to use the parameter `-r`.
+have to use the flag `-r`. The r stands for recursive, which you can think of 
+as repeatedly. 
 
 ```
 $ cp -r my_first_folder a_copy_of_my_first_folder
 ```
 
-You can use the command `mv` (*move*) to rename or relocate files
+You can use `mv` command(*move*) to rename or move files
 or folders. To rename the file `a_copy_of_test_file.txt` to
 `test_file_with_new_name.txt` call
 
@@ -349,7 +365,7 @@ $ mv a_copy_of_test_file.txt test_file_with_new_name.txt
 ```
 
 With `mv` you can also move a file into a folder. For this the second
-argument has to be a folder. For example, to move the file now named
+argument must be a folder. For example, to move the file now named
 `test_file_with_new_name.txt` into the folder `my_first_folder` use 
 
 ```
@@ -365,13 +381,13 @@ $ touch file1 file2
 $ mv file1 file2 my_first_folder
 ```
 
-At this point we can introduce another handy feature most shells offer
-which is called *globbing*. Let us assume you want to apply the same
+Now we can introduce another useful feature most shells offer
+called *globbing*. Imagine you want to apply the same
 command to several files. Instead of explicitly writing all the file
-names you can use a *globbing pattern* to address them. There are
-different wildcards that can be used for these patterns. The most
-important one is the asterisk (`*`). It can replace none, one or more
-characters. Let us explore this with a small example:
+names (which would take a lot of time) you can instead use a *globbing pattern* 
+to refer to all of them. There are different "wildcards" that can be used for these patterns. 
+The most important one is the asterisk (`*`). It can replace none, one or more
+characters. Let explain this with a quick example:
 
 ```
 $ touch file1.txt file2.txt file3
@@ -381,13 +397,19 @@ $ mv *txt my_first_folder
 
 The `ls` shows the two files matching the given pattern
 (i.e. `file1.txt` and `file2.txt`) while dismissing the one not
-matching (i.e. `file3`). Same for `mv` - it will only move the two
+matching (i.e. `file3`). In this case the `*` basically means match
+anything before txt. 
+
+Similarly for `mv` - it will only move the two
 files ending with `txt`.
 
-We accumulated several test files that we do not need anymore. Time to clean
-up a little bit. With the command `rm` (*remove*) you can delete files
-and folders. Please be aware that there is no such thing as a trash
-bin if you remove items this way. They will be gone for good and without further notice. 
+We now have several empty test files that we don't need anymore. The last command we 
+will learn in this section is `rm` (*remove*) which allows you to delete files
+and folders. **Danger Ahead** there is no trash bin if you remove items using `rm`. 
+They will be gone for good and without further notice. It's good practice to use `rm -i`, 
+this flag askes before deleting a file, which can be a lifesaver. Note, once you are more 
+advanced and comfortable using a unix system you can modify the default behaviour of rm so 
+that it will always ask you before deleting. 
 
 To delete a file in `my_first_folder` call:
 
@@ -407,7 +429,9 @@ Alternatively you can use the command `rmdir`:
 $ rmdir my_first_folder
 ```
 
-# File content - part 1
+However, keep in mind `rmdir` will only work on empty directories. 
+
+# File contents - Viewing and Editing files 
 
 Topics:
 
@@ -418,18 +442,16 @@ Topics:
 * `tail`
 * `cut`
 
-Until now we did not care about the content of the files. This will
-change now. Please go into the folder `unix_course_files`:
+We haven't really looked at how to view and edit files yet, so now we will move on
+and look at some of the commands we can use for this. Please go into the folder `unix_course-2020-02-14`
+if you aren't already:
 
-```
-$ cd unix_course_files
-```
 
-There should be some files waiting for you. To read the content with
-the possibility to scroll around we need a so called pager
-program. Most Unix systems offer the programs `more` and `less` which
-have very similar functionalities ("more or less are more or less the
-same"). We will use the later one here. Let's open the file
+You should see some files there already (*and by now you should know how to check). 
+To read the content of files with the ability to scroll around we need 
+a so called pager program. We will use the tool `less` which should be available on 
+all of your systems. Let's start with the file:
+
 `origin_of_species.txt`
 
 ```
@@ -438,30 +460,27 @@ $ less origin_of_species.txt
 
 The file contains Charles Darwin's *Origin of species* in plain
 text. You can scroll up and down line-wise using the arrow keys or page-wise
-using the page-up/page-down keys. To quit use the key `q`. With
+using the page-up/page-down keys. To quit use `q`. With
 pager programs you can read file content interactively, but sometimes
-you just want to have the content of a file given to you (i.e. on the
-*standard output*). The command `cat` (*concatenate*) does that for one
-or more files. Let us use it to see what is in the example file
-`two_lines.txt`. Assuming you are in the folder `unix_course_files`
+you just need the content of a file. The command `cat` (*concatenate*) does just 
+that for one or more files. Let us use it to see what is in the example file
+`lorem_ipsum.txt`. Assuming you are still in the folder `unix_course-2020-02-14`
 you can call
 
 ```
-$ cat two_lines.txt
+$ cat lorem_ipsum.txt
 ```
 
 The content of the file is shown to you. You can apply the command to
 two files and the content is concatenated and returned:
 
 ```
-$ cat two_lines.txt three_lines.txt
+$ cat lorem_ipsum.txt lorem_ipsum_2.txt
 ```
 
 This is a good time to introduce the *standard input* and *standard
-output* and what you can do with it. Above I wrote the output is given
-to you. This means it is written to the so called *standard
-output*. You can redirect the *standard output* into a file by using
-`>`. Let us use the call above to generate a new file that contains
+output* and what you can do with it. You can redirect the *standard output* 
+into a file by using the `>` operator. Let us use the call above to generate a new file that contains
 the combined content of both files:
 
 ```
@@ -742,5 +761,7 @@ Number of lines that contains species:
  15322 origin_of_species.txt
       5 genes.csv
  15327 total
-```       
+```      
+
+
 
