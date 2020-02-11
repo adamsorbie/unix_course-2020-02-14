@@ -8,6 +8,7 @@
 * change genes.csv to something more relevant for target audience e.g. mapping file from 16S experiment 
 * include use case - extracting OTU sequences from fasta file 
 * show example of script used for analysis like RNA seq and explain what's going on/see if people can work it out
+* add contents and link to each section
 
 
 # unix_course-2020-02-14
