@@ -1,17 +1,13 @@
-#### Adapted (borrowed heavily) from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md
+#### Adapted (using a lot of content) from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md
+
+(This was the first course I attended which really helped me learn how to use the Unix shell)
 
 #### Adam Sorbie
 
-# to do
-
-* show example of script used for analysis like RNA seq and explain what's going on/see if people can work it out
-* add useful links at the end
 
 # Table of Contents 
 
-      - [Adapted (borrowed heavily) from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md](#adapted--borrowed-heavily--from-introduction-to-the-unix-shell-for-biologists-by-konrad-u-f-rstner--https---githubcom-konrad-2017-03-29-software-carpentry-munich-teaching-material-edit-master-unix-shell-unix-shell-handoutmd)
-      - [Adam Sorbie](#adam-sorbie)
-- [to do](#to-do)
+
 - [unix_course-2020-02-14](#unix-course-2020-02-14)
   * [Installation instructions](#installation-instructions)
         * [Easy install](#easy-install)
@@ -28,7 +24,8 @@
 - [Repeating command using the `for` loop](#repeating-command-using-the--for--loop)
 - [Shell scripting](#shell-scripting)
   * [Example use case](#example-use-case)
-
+- [Bonus](#Bonus)
+- [Useful Links](#Useful-Links)
 
 
 # unix_course-2020-02-14
@@ -784,8 +781,37 @@ grep -f $1 -w -A8 $2
 # sequences are 8 lines
 ``` 
 
+# Bonus 
 
+I thought it might also be useful to quickly show an example of a BASH script 
+used for analysis. This is one I wrote to run Salmon on some RNA seq data: 
 
+```
+#!/bin/bash
+
+for fn in trimmed_reads/F123{54..72};
+do
+	samp=`basename ${fn}`
+	echo "Processing sample ${samp}"
+	echo ${fn}
+        salmon quant -i mouse_index.idx -l A \
+	-1 ${fn}_R1_001.qc.fq.gz \
+	-2 ${fn}_R2_001.qc.fq.gz \
+        -p 8 --validateMappings -o quants/${samp}_quant
+done 
+
+```
+
+Can you understand what it's doing? 
+
+# Useful Links
+
+here are some useful links if you want to learn more about working with 
+the unix shell 
+http://www.linuxcommand.org/lc3_learning_the_shell.php
+https://www.datacamp.com/courses/introduction-to-shell-for-data-science
+https://www.bash.academy/
+https://www.learnshell.org/
 
 
 
