@@ -41,7 +41,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 You will then be prompted to restart your computer. After booting up again, open the Microsoft store app and search for your preferred linux distribution. We will be using Ubuntu for this course, so I would suggest using that but if you want to use another one that's also ok.
 
-Once installed, open the terminal and provide a username and password. To download the contents of this course type or copy paste the following into your terminal:
+Once installed, open the terminal and provide a username and password. To download the contents of this course type or copy paste the following into your terminal (recommended that you do this on the day/night before as it is liable to change):
 
 ```
 git clone https://github.com/adamsorbie/unix_shell_course-2020-02-14.git
@@ -507,13 +507,13 @@ Let try this to generate a new file that contains
 the combined content of both files:
 
 ```
-$ cat two_lines.txt three_lines.txt > five_lines.txt
+$ cat lorem_ipsum.txt lorem_ipsum_2.txtt > lorem_ipsum_combined.txt
 ```
 
 Use cat again to have a look at the content of this file
 
 ```
-$ cat five_lines.txt
+$ cat lorem_ipsum_combined.txt
 ```
 
 *standard output* can also be redirected to other tools as
