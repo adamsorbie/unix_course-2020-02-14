@@ -760,11 +760,8 @@ a way we could do this?
 
 
 
-
-
-
-
-
+<details><summary>Solution</summary>
+<p>
 
 An easy way to do this (**not necessarily the best but it works**)
 
@@ -779,6 +776,9 @@ grep -f $1 -w -A8 $2 >> $3
 # print X number of lines of context after, in this case 8 because there our
 # sequences are 8 lines
 ``` 
+
+</p>
+</details>
 
 You may notice this prints a couple of extra OTU numbers and this is because the 
 sequences in the FASTA files are not always exactly 8. A better way to do this
