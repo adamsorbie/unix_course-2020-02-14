@@ -773,11 +773,27 @@ your own or you can use the one provided
 
 ```
 echo "Extracting OTUs"
-grep -f $1 -w -A8 $2 
+grep -f $1 -w -A8 $2 >> $3
 
 # -f means use a file as input, -w means match the whole word, and A means 
 # print X number of lines of context after, in this case 8 because there our
 # sequences are 8 lines
+``` 
+
+You may notice this prints a couple of extra OTU numbers and this is because the 
+sequences in the FASTA files are not always exactly 8. A better way to do this
+but much more complicated, would be to make your FASTA file single line before 
+extracting the sequences. 
+
+``` 
+echo "enter sequence filename: "
+read filename
+echo "enter file containing patterns to match: "
+read patterns
+echo "enter output filename: "
+read output
+perl -pe '/^>/ ? print "\n" : chomp' $filename | grep -f $patterns -w -A1 | grep -v -- "^--$" > $output
+
 ``` 
 
 # Bonus 
