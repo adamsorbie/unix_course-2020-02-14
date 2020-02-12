@@ -1,4 +1,4 @@
-#### Adapted from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md
+#### Adapted (borrowed heavily) from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md
 
 #### Adam Sorbie
 
@@ -16,7 +16,7 @@ Short Unix course 2020
 
 ## Installation instructions
 
-To take part in this course you need to have a linux bash shell installed on your computer. Luckily Windows 10 has made this 1000x easier than it used to be and you can run an almost complete linux subsystem on your windows PC.
+To take part in this course you need to have a linux bash shell installed on your computer. Luckily Windows 10 has made this so much easier than it used to be and you can run an almost complete linux subsystem on your windows PC.
 
 ##### Easy install
 
@@ -28,7 +28,9 @@ You will then be prompted to restart your computer. After booting up again, open
 
 Once installed, open the terminal and provide a username and password. To download the contents of this course type or copy paste the following into your terminal:
 
-`git clone https://github.com/adamsorbie/unix_course-2020-02-14.git`
+```
+git clone https://github.com/adamsorbie/unix_course-2020-02-14.git
+```
 
 if that doesn't work then you may need to install git first, you can do this by typing:
 
@@ -56,7 +58,6 @@ analyses more reproducible.
 
 * Anytime you see a path with yourusername in it e.g. `/home/yourusername` please replace "yourusername" with
   the username you chose for yourself during the installation.
-
 
 
 # The basic anatomy of a command line call
@@ -561,7 +562,7 @@ tabular-separated. You can extract selected columns with `cut`:
 $ cut -f 1,4 mapping_file.tab
 ```
 
-# File content - part 2
+# File content - Sorting, counting and Filtering files
 
 Topics:
 
@@ -570,18 +571,18 @@ Topics:
 * `uniq`
 * `grep`
 
-There are several tools that let you manipulate the content of a plain
-text file or return information about it. If you want for example some
-statistics about the number of character, words and lines use the
-command `wc`. Let us count the number of lines in the file
+There are also several tools that allow you to manipulate the content of a
+text file or find out information about it. For example if you would like to 
+find out the number of characters, words or lines in a file, you can use the
+`wc` command. Try to count the number of lines in the file:
 `origin_of_species.txt`:
 
 ```
 $ wc -l origin_of_species.txt
 ```
 
-You can use the command `sort` to sort a file alpha-numerically. Test
-the following calls
+You can use `sort` to sort a file alpha-numerically. Try the following commands 
+on the file `unsorted_numbers.txt`  
 
 ```
 $ sort unsorted_numbers.txt
@@ -589,62 +590,49 @@ $ sort -n unsorted_numbers.txt
 $ sort -rn unsorted_numbers.txt
 ```
 
-and try to understand the output.
+and see if you can understand the output.
 
-The tool `uniq` takes a sorted list of lines and removes line-wise the
-redundancy. Please have a look at the content of the file
-`redundant.txt`. Then use `uniq` to generate a non-redundant list:
-
-```
-$ uniq redundant.txt
-```
-
-If you call `uniq` with `-c` you get the number of occurrence for each
-remaining entry:
+`uniq` takes a sorted list of lines returns the uniques. Let's imagine we got a file 
+containing a list of bacterial taxa from our sequencing data. Due to the nature of 16S
+sequencing we will often have mutiple instances with the same taxonomic assignment, and in 
+this case we want to look at the uniques. Have a quick look at `taxa.txt`. Then use `uniq` to generate 
+a non-redundant list of taxa:
 
 ```
-$ uniq -c redundant.txt
+$ uniq taxa.txt
+```
+
+If you call `uniq` with `-c` you can count the number of occurrence of each genus
+```
+$ uniq -c taxa.txt
 ```
 
 With the tool `grep` you can extract lines that match a given
-pattern. For instance, if you want to find all lines in
-`origin_of_species.txt` that contain the word `species` call
+pattern. For instance, let's say we are interested in the order 
+Bacteroidales. Note that grep by default is case
+sensitive, to remove this behaviour you can use the `-i` flag. 
 
 ```
-$ grep species origin_of_species.txt
-```
-
-As you can see we only get the lines that contain `species` but not
-the ones that contain `Species`. To make the search case-insensitive
-use the parameter `-i`.
-
-```
-$ grep -i species origin_of_species.txt
+$ grep Bacteroidales taxa.txt
 ```
 
 If you are only interested in the number of lines that match the pattern
 use `-c`:
 
 ```
-$ grep -ic species origin_of_species.txt
+$ grep -c Bacteroidales taxa.txt
 ```
 
 # Connecting tools
 
-Another piece of the Unix philosophy is to build small tools that do
-one thing optimally and use the standard input and standard
-output. The real power of Unix builds on the capability to easily
-connect tools. For this so-called *pipes* are used. To use the
-*standard output* of one tool as *standard input* of another tool the
-vertical bar `|` is used. For example, in order to extract the first
-1000 lines from `origin_of_species.txt`, search for lines that contain
-`species`, then search in those lines the ones which contain `wild`
-and finally replace the `w`s by `m`s call (Please write this in one line
-in the shell and remove the `\`):
+The real power of Unix is built on its capability to readily connect tools. 
+For this so-called *pipes* are used. To use the *standard output* of one tool 
+as *standard input* of another command `|` is used. For example, based on what
+we just did above, let's say we want to find the unique taxonomic assignments
+within the order Bacteroidales and write this output to a file
 
 ```
-$ head -n 1000 origin_of_species.txt | grep species \
-  | grep wild | tr w m
+$ grep Bacteroidales taxa.txt | uniq > Bacteroidales.txt
 ```
 
 # Repeating command using the `for` loop
