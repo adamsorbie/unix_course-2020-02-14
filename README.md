@@ -191,8 +191,8 @@ $ ls /
 to see the content of the root folder. You should see something like
 
 ```
-bin   data  etc  lib    lost+found  mnt  proc  run   srv  tmp  var
-boot  dev   home lib64  media   opt  root  sbin  sys  usr
+bin   c    etc  home  lib    media  opt   root  sbin  srv  tmp  var
+boot  dev  h    init  lib64  mnt    proc  run   snap  sys  usr
 ```
 
 Most of these folders are not particularly important for you right now.
