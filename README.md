@@ -130,7 +130,7 @@ and `man` allows you to read those. Reading the manual should tell you what the 
 For example, to get the man of `cd` type
 
 ```
-$ man cd
+$ man ls
 ```
 
 To close the manual use `q`. Note some tools may offer help in a different way, common ones are
