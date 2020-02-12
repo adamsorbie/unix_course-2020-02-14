@@ -4,10 +4,9 @@
 
 # to do
 
-* finish editing text
-* include use case - extracting OTU sequences from fasta file
 * show example of script used for analysis like RNA seq and explain what's going on/see if people can work it out
 * add contents and link to each section
+* add useful links at the end
 
 
 # unix_course-2020-02-14
@@ -637,7 +636,7 @@ $ grep Bacteroidales taxa.txt | uniq > Bacteroidales.txt
 
 # Repeating command using the `for` loop
 
-Assuming you want to generate a copy of each of your files ending with ´.txt´. A
+Now we want to generate a copy of all the text files in your working directory. Running this
 
 ```
 cp *txt copy_of_*txt
@@ -654,88 +653,61 @@ for FILE in three_lines.txt two_lines.txt
 > head -n 1 $FILE
 > done
 ```
-
-The variable `FILE` (you can give it also any other name) can be used
-inside of the loop.
-
-If you press now Ctr-↑ you will get the line
+You can not only just use one command inside of a loop but multiple, 
+for example now we want to look at Clostridiales and Lactobacillaes as well as
+Bacteroidales, to do this we can a for loop:
 
 ```
-for FILE in three_lines.txt two_lines.txt; do head -n 1 $FILE; done
-```
-
-which is equivalent to the call before. You can not only call one
-command inside of a loop but several:
-
-```
-for FILE in three_lines.txt two_lines.txt
-> do
-> head -n 1 $FILE
-> echo "-----------------"
+for taxa in Bacteroidales Clostridiales and Lactobacillales
+> do 
+> grep $taxa taxa.txt | uniq >> taxa_list.txt 
 > done
 ```
-
-```
-for FILE in *txt
-> do
-> head -n 1 $FILE
-> echo "-----------------"
-> done
-```
-
-```
-for FILE in *txt
-> do
-> cp $FILE copy_of_$FILE
-> done
-```
-
 # Shell scripting
 
 Open a new file in a text editor of you choice, call it
 `count_lines.sh` and add the following text:
 
 ```
-echo "Number of lines in the given file":
+echo "Number of lines that contain species":
 wc -l origin_of_species.txt
 ```
 
 Save the file, make sure the file `origin_of_species.txt` is in the
-same folder and run it the script:
+same folder and run the script:
 
 ```
 $ bash count_lines.sh
 ```
 
-You should get someting like
+You should get something like
 
 ```
 Number of lines that contains species:
 15322 origin_of_species.txt
 ```
 
-This a very first shell script. Now we want to make it more
-flexible. Instead of hard coding the input file for `wc -l` we want to
-be able to give this as argument to the shell script. For this we
-change the shell script to:
+This a very first shell script. Now we can make it a little more
+flexible. Instead of hard coding (setting this variable within the script itself) 
+the input file for `wc -l` we want to be able to give this as argument. 
+To do this we change the shell script to:
 
 ```
 echo "Number of lines in the given file":
 wc -l $1
 ```
 
-The `$1` is a variable that represents the first argument given to the
-shell scrip. Now you can call the script in the following way
+`$1` is a variable that represents the first argument given. 
+Now you can call the script like this:
 
 ```
 $ bash count_lines.sh origin_of_species.txt
 ```
 
-You should get the same results as before. If you also like to take
-the second argument use the variable `$2`. For using all arguments
-given to the shell script use the variable "$@". E.g change the shell
+You should get the same results as before. If you want to your script to take
+a second argument you can use `$2`. To use all arguments
+given to the shell script use the variable "$@". Change the shell
 script to:
-
 
 ```
 echo "Number of lines in the given file(s)":
@@ -745,14 +717,53 @@ wc -l $@
 and run it with several input files:
 
 ```
-bash count_lines.sh origin_of_species.txt genes.csv
+bash count_lines.sh origin_of_species.txt taxa.txt
 ```
 
 You should get something like:
 
 ```
-Number of lines that contains species:
- 15322 origin_of_species.txt
-      5 genes.csv
- 15327 total
+Number of lines in the given file(s):
+ 21648 origin_of_species.txt
+      313 taxa.txt
+ 21961 total
 ```
+
+Now we will look at a use for shell scripts that can be really useful for you 
+(**if you are studying the microbiome**). After doing your differential abundance 
+analysis you often want to extract the sequences of the OTUs which were identified 
+as differentially abundant and perhaps check their taxonomy using something like
+BLAST or EZtaxon. This is extremely annoying to do manually and takes a lot of 
+time, but luckily with a bit of BASH magic you can automate this process easily. 
+
+Consider that the headers in a fasta file have a consistent format, and also
+that grep can take a txt file as input (use man to check this), can you think of 
+a way we could do this? 
+
+
+
+
+
+
+
+
+
+An easy way to do this (**not necessarily the best but it works**)
+
+Firstly you need a text file with your OTUs, you should be able to generate
+your own or you can use the one provided
+
+```
+echo "Extracting OTUs"
+grep -f $1 -w -A8 $2 
+
+# -f means use a file as input, -w means match the whole word, and A means 
+# print X number of lines of context after, in this case 8 because there our
+# sequences are 8 lines
+``` 
+
+
+
+
+
+
