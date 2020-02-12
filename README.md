@@ -149,8 +149,9 @@ to reveal all of the options or just continue typing until the name is unique. P
 
 * Tab - extend commands and file/folder names
 
+Type the following and press tab to see how it works
 ```
-$ man cd
+$ ls unix_
 ```
 
 # Files, folders, locations
