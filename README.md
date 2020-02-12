@@ -8,9 +8,7 @@
 # Table of Contents 
 
 
-- [unix_course-2020-02-14](#unix-course-2020-02-14)
-  * [Installation instructions](#installation-instructions)
-        * [Easy install](#easy-install)
+- [Installation instructions](#installation-instructions)
 - [Background](#background)
 - [Course conventions](#course-conventions)
 - [The basic anatomy of a command line call](#the-basic-anatomy-of-a-command-line-call)
@@ -23,31 +21,30 @@
 - [Connecting tools](#connecting-tools)
 - [Repeating command using the `for` loop](#repeating-command-using-the--for--loop)
 - [Shell scripting](#shell-scripting)
-  * [Example use case](#example-use-case)
+- [Useful Example of Shell Scripting](#Useful-Example-of-Shell-Scripting)
 - [Bonus](#Bonus)
 - [Useful Links](#Useful-Links)
 
 
-# unix_course-2020-02-14
-Short Unix course 2020
+# Unix_shell_course-2020-02-14
+Short Unix shell course Feb 2020 - Haller Lab
 
 
 ## Installation instructions
 
-To take part in this course you need to have a linux bash shell installed on your computer. Luckily Windows 10 has made this so much easier than it used to be and you can run an almost complete linux subsystem on your windows PC.
+To take part in this course you need to have a Unix/Linux bash shell installed on your computer. Luckily Windows 10 has made this so much easier than it used to be and you can run an almost complete Linux subsystem on your windows PC.
 
-##### Easy install
 
 Open a powershell (search for powershell in the search bar) as an administrator and copy and paste the following command:
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
-You will then be prompted to restart your computer. After booting up again, open the microsoft store app and search for your preferred linux distribution. We will be using Ubuntu for this course, so I would suggest using that but if you want to use another one that's also ok.
+You will then be prompted to restart your computer. After booting up again, open the Microsoft store app and search for your preferred linux distribution. We will be using Ubuntu for this course, so I would suggest using that but if you want to use another one that's also ok.
 
 Once installed, open the terminal and provide a username and password. To download the contents of this course type or copy paste the following into your terminal:
 
 ```
-git clone https://github.com/adamsorbie/unix_course-2020-02-14.git
+git clone https://github.com/adamsorbie/unix_shell_course-2020-02-14.git
 ```
 
 if that doesn't work then you may need to install git first, you can do this by typing:
@@ -76,15 +73,16 @@ analyses more reproducible.
 
 * Anytime you see a path with yourusername in it e.g. `/home/yourusername` please replace "yourusername" with
   the username you chose for yourself during the installation.
+* If you have any questions or something isn't working, you can interrupt me at any time to ask. 
+
 
 
 # The basic anatomy of a command line call
 
 Running a tool in the command line follows a simple
-pattern. At first you have to write the name of the command (if it is
-not globally installed its precise location needs to be given - we
-will get to this later). Some command line tools require additional
-parameters. While the parameters are the requirement of the program
+pattern. At first you have to write the name of the command. 
+Some command line tools require additional parameters. 
+While the parameters are the requirement of the program
 the actual values we give are called arguments. There are two
 different ways how to pass those arguments to a program - via keyword
 parameters (also called named keywords, flags or options) or via
@@ -210,7 +208,7 @@ the folder is `unix_course-2020-02-14`. You can see what's inside the folder by
 calling `ls` like this:
 
 ```
-$ ls unix_course-2020-02-14
+$ ls unix_shell_course-2020-02-14
 ```
 
 This is the so called *relative path* as it is relative to where you are right now
@@ -218,7 +216,7 @@ This is the so called *relative path* as it is relative to where you are right n
 starts with a `/` and is `/home/yourusername/unix_course-2020-02-14`. Call `ls` like this:
 
 ```
-$ ls /home/yourusername/unix_course-2020-02-14
+$ ls /home/yourusername/unix_shell_course-2020-02-14
 ```
 You can think of it a little like being give a street address without the city or town. Gregor-Mendel Str. 2
 may make sense to you if you are in Freising (*relative* to where you are), however if you are located elsewhere you would also need to know
@@ -263,17 +261,17 @@ should list the content of your home directory independent of where you are in t
 Now we know where we are and what's there already we can start to move around the file system.
 To do this we use the command `cd` (change directory). If
 you are in your home directory `/home/youruserbname/` you can go into the
-folder `unix_course-2020-02-14` by typing
+folder `unix_shell_course-2020-02-14` by typing
 
 ```
-$ cd unix_course-2020-02-14
+$ cd unix_shell_course-2020-02-14
 ```
 
 After that call `pwd` to make sure you're in the correct folder.
 
 ```
 $ pwd
-/home/yourusername/unix_course-2020-02-14
+/home/yourusername/unix_shell_course-2020-02-14
 ```
 
 To go back into your home directory you have a couple of different options.
@@ -291,7 +289,7 @@ $ cd ~/
 ```
 
 or the *relative path*, in this case the parent directory of
-`/home/yourusername/unix_course-2020-02-14`:
+`/home/yourusername/unix_shell_course-2020-02-14`:
 
 ```
 $ cd ../
@@ -747,6 +745,7 @@ Number of lines in the given file(s):
       313 taxa.txt
  21961 total
 ```
+# Useful Example of Shell Scripting
 
 Now we will look at a use for shell scripts that can be really useful for you 
 (**if you are studying the microbiome**). After doing your differential abundance 
