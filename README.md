@@ -1,4 +1,4 @@
-#### Adapted (using a lot of content) from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md
+#### Adapted from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md
 
 (This was the first course I attended which really helped me learn how to use the Unix shell)
 
