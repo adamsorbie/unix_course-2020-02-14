@@ -5,8 +5,30 @@
 # to do
 
 * show example of script used for analysis like RNA seq and explain what's going on/see if people can work it out
-* add contents and link to each section
 * add useful links at the end
+
+# Table of Contents 
+
+      - [Adapted (borrowed heavily) from Introduction to the Unix shell for biologists by Konrad U. Förstner: https://github.com/konrad/2017-03-29-Software_Carpentry_Munich_Teaching_Material/edit/master/Unix_Shell/Unix_Shell_Handout.md](#adapted--borrowed-heavily--from-introduction-to-the-unix-shell-for-biologists-by-konrad-u-f-rstner--https---githubcom-konrad-2017-03-29-software-carpentry-munich-teaching-material-edit-master-unix-shell-unix-shell-handoutmd)
+      - [Adam Sorbie](#adam-sorbie)
+- [to do](#to-do)
+- [unix_course-2020-02-14](#unix-course-2020-02-14)
+  * [Installation instructions](#installation-instructions)
+        * [Easy install](#easy-install)
+- [Background](#background)
+- [Course conventions](#course-conventions)
+- [The basic anatomy of a command line call](#the-basic-anatomy-of-a-command-line-call)
+- [How to get help](#how-to-get-help)
+- [Tab Completion](#tab-completion)
+- [Files, folders, locations](#files--folders--locations)
+- [Manipulating files and folder](#manipulating-files-and-folder)
+- [File contents - Viewing and Editing files](#file-contents---viewing-and-editing-files)
+- [File content - Sorting, counting and Filtering files](#file-content---sorting--counting-and-filtering-files)
+- [Connecting tools](#connecting-tools)
+- [Repeating command using the `for` loop](#repeating-command-using-the--for--loop)
+- [Shell scripting](#shell-scripting)
+  * [Example use case](#example-use-case)
+
 
 
 # unix_course-2020-02-14
