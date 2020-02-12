@@ -669,7 +669,7 @@ With `for` loops you can solve this problem. Let's start with a simple
 one.
 
 ```
-for FILE in three_lines.txt two_lines.txt
+for FILE in lorem_ipsum.txt lorem_ipsum2.txt
 > do
 > head -n 1 $FILE
 > done
@@ -686,15 +686,17 @@ for taxa in Bacteroidales Clostridiales and Lactobacillales
 ```
 # Shell scripting
 
-Open a new file in a text editor of you choice, call it
-`count_lines.sh` and add the following text:
+Open a new file in a text editor of you choice, I would recommend using _nano_ in this case
+but if you are brave you can also try _vi/vim_. To open, simply type the name of the text editor
+into your shell. Add the following text:
+
 
 ```
 echo "Number of lines that contain species":
 wc -l origin_of_species.txt
 ```
 
-Save the file, make sure the file `origin_of_species.txt` is in the
+Save the file (nano: ctrl-o) as `count_lines.sh`, exit your text editor (nano: ctrl-x) make sure the file `origin_of_species.txt` is in the
 same folder and run the script:
 
 ```
