@@ -539,7 +539,7 @@ $ echo "Linux is boring" > super_cool.txt
 ```
 
 only the last string will be written to the file and the
-previous one will be overwritten (Worst of all the text in your file will be a lie ;) ).
+previous one will be overwritten (Worst of all the text in your file is totally wrong ;) ).
 To append output of a command to a file without overwriting use `>>`.
 
 ```
