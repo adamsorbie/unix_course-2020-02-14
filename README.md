@@ -462,10 +462,13 @@ Topics:
 
 We haven't really looked at how to view and edit files yet, so now we will move on
 and look at some of the commands we can use for this. Please go into the folder `unix_course-2020-02-14`
-if you aren't already:
+if you aren't already and unzip files.zip using the following command:
 
+```
+unzip files.zip 
+```
 
-You should see some files there already (*and by now you should know how to check).
+You should now see some files there (*and by now you should know how to check).
 To read the content of files with the ability to scroll around we need
 a so called pager program. We will use the tool `less` which should be available on
 all of your systems. Let's start with the file:
