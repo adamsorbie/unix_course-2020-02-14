@@ -544,7 +544,7 @@ To append output of a command to a file without overwriting use `>>`.
 
 ```
 $ echo "Linux is cool" > super_cool.txt
-$ echo "Adam is the best teacher" >> super_cool.txt
+$ echo "I love Linux" >> super_cool.txt
 ```
 
 Now your file should contain two lines
