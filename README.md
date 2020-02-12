@@ -35,7 +35,7 @@ Short Unix shell course Feb 2020 - Haller Lab
 To take part in this course you need to have a Unix/Linux bash shell installed on your computer. Luckily Windows 10 has made this so much easier than it used to be and you can run an almost complete Linux subsystem on your windows PC.
 
 
-Open a powershell (search for powershell in the search bar) as an administrator and copy and paste the following command:
+Open a powershell (search for powershell in the search bar) **as an administrator** (right click on the program) and copy and paste the following command:
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
