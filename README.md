@@ -250,7 +250,7 @@ $ ls ../../
 
 you should see the content of the parent folder of the parent folder which on
 a normal linux system is the root folder (`/`) assuming you are in `/home/yourusername/`.
-However, on WSL it should show the content of the home folder. Another
+However, on WSL it may be slightly different. Another
 convention is that `~/` represents the home directory of the user. The
 command
 
