@@ -127,7 +127,7 @@ output* of the shell which is shown on the screen when you call the command.
 Perhaps the most important command to know, although not particularly helpful if you don't
 understand anything yet, is `man` which stands for *manual*. Most commands have a manual
 and `man` allows you to read those. Reading the manual should tell you what the command does and how to use it.
-For example, to get the man of `cd` type
+For example, to get the man of `ls` type
 
 ```
 $ man ls
