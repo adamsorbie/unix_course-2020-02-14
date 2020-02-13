@@ -15,11 +15,11 @@
 - [How to get help](#how-to-get-help)
 - [Tab Completion](#tab-completion)
 - [Files, folders, locations](#files--folders--locations)
-- [Manipulating files and folder](#manipulating-files-and-folder)
+- [Manipulating files and folders](#manipulating-files-and-folders)
 - [File contents - Viewing and Editing files](#file-contents---viewing-and-editing-files)
 - [File content - Sorting, counting and Filtering files](#file-content---sorting--counting-and-filtering-files)
 - [Connecting tools](#connecting-tools)
-- [Repeating command using the `for` loop](#repeating-command-using-the--for--loop)
+- [Repeating commands using a `for` loop](#repeating-commands-using-a--for--loop)
 - [Shell scripting](#shell-scripting)
 - [Useful Example of Shell Scripting](#Useful-Example-of-Shell-Scripting)
 - [Bonus](#Bonus)
@@ -151,8 +151,12 @@ to reveal all of the options or just continue typing until the name is unique. P
 
 Type the following and press tab to see how it works
 ```
-$ ls unix_
+$ ls un
 ```
+If you have downloaded the course folder it should auto-complete to: 
+
+```
+$ ls unix_shell_course-2020-02-14/
 
 # Files, folders, locations
 
@@ -180,7 +184,9 @@ On WSL, the output of `pwd` should be `/home/username`, yours
 may differ slightly however. The next command we need is `ls`.
 This command simply lists the contents of a folder.
 If you call it without any arguments it will output the content
-of the current folder. We can use the `ls` command to get a rough overview
+of the current folder. 
+
+We can use the `ls` command to get a rough overview
 of what a common Unix file system tree looks like and learn how to address
 files and folders. The root folder of a system starts with `/`. Type
 
@@ -199,8 +205,9 @@ Most of these folders are not particularly important for you right now.
 Those are more important if you are the administrator of the system.
 Normal users do not have the permission to make changes here.
 Currently your home directory is where you will work today and
-probably where you will end up doing most of your work in future. In here we
-will learn how work with paths. A file or folder can be addressed
+probably where you will end up doing most of your work in future. 
+
+In this section we will learn how work with paths. A file or folder can be addressed
 by its *absolute* or its *relative path*. As you have
 downloaded the github repo containing todays course materials, when you type `ls`
 you should see a folder with the name of todays course.
@@ -219,9 +226,9 @@ starts with a `/` and is `/home/yourusername/unix_course-2020-02-14`. Call `ls` 
 ```
 $ ls /home/yourusername/unix_shell_course-2020-02-14
 ```
-You can think of it a little like being give a street address without the city or town. Gregor-Mendel Str. 2
-may make sense to you if you are in Freising (*relative* to where you are), however if you are located elsewhere you would also need to know
-in which place this street is located.
+You can think of it a little like being given a street address without the city or town. Gregor-Mendel Str. 2
+may make sense to you if you are in Freising (*relative* to where you are), however if you live elsewhere you 
+may not know this street and would also need to know in which place you could find this street.
 
 There are some conventions regarding *relative* and *absolute paths*. One
 is that a dot (`.`) represents the current folder you are in. The command
@@ -314,7 +321,7 @@ directory*). Go into the home directory and type:
 $ mkdir my_first_folder
 ```
 
-In Unix and often many programming languages "No
+In Unix-based shells and often many programming languages "No
 news is good news." The command successfully created the folder
 `my_first_folder`. You can check by calling `ls`, but `mkdir` did
 not tell you this. If you do not get a message this _usually_ means
@@ -329,7 +336,7 @@ mkdir: cannot create directory ‘my_first_folder’: File exists
 So if a command does not complain you can usually assume there was no
 error.
 
-# Manipulating files and folder
+# Manipulating files and folders
 
 Topics:
 
@@ -402,10 +409,10 @@ $ mv file1 file2 my_first_folder
 Now we can introduce another useful feature most shells offer
 called *globbing*. Imagine you want to apply the same
 command to several files. Instead of explicitly writing all the file
-names (which would take a lot of time) you can instead use a *globbing pattern*
+names (which could take a long time) you can instead use a *globbing pattern*
 to refer to all of them. There are different "wildcards" that can be used for these patterns.
 The most important one is the asterisk (`*`). It can replace none, one or more
-characters. Let explain this with a quick example:
+characters. Let's explain this with a quick example:
 
 ```
 $ touch file1.txt file2.txt file3
@@ -423,10 +430,12 @@ files ending with `txt`.
 
 We now have several empty test files that we don't need anymore. The last command we
 will learn in this section is `rm` (*remove*) which allows you to delete files
-and folders. **Danger Ahead** there is no trash bin if you remove items using `rm`.
+and folders. 
+
+**Danger Ahead** there is no trash bin if you remove items using `rm`.
 They will be gone for good and without further notice. It's good practice to use `rm -i`,
 this flag askes before deleting a file, which can be a lifesaver. Note, once you are more
-advanced and comfortable using a unix system you can modify the default behaviour of rm so
+advanced and comfortable using the unix shell you can modify the default behaviour of rm so
 that it will always ask you before deleting.
 
 To delete a file in `my_first_folder` call:
@@ -462,13 +471,13 @@ Topics:
 
 We haven't really looked at how to view and edit files yet, so now we will move on
 and look at some of the commands we can use for this. Please go into the folder `unix_course-2020-02-14`
-if you aren't already and unzip files.zip using the following command:
+if you aren't already and unzip `files.zip` using the following command:
 
 ```
 unzip files.zip 
 ```
 
-You should now see some files there (*and by now you should know how to check).
+You should now see some files there (*and by now you should know how to check*).
 To read the content of files with the ability to scroll around we need
 a so called pager program. We will use the tool `less` which should be available on
 all of your systems. Let's start with the file:
@@ -484,7 +493,9 @@ text. You can scroll up and down line-wise using the arrow keys or page-wise
 using the page-up/page-down keys. To quit use `q`. With
 pager programs you can read file content interactively, but sometimes
 you just need the content of a file. The command `cat` (*concatenate*) does just
-that for one or more files. Let us use it to see what is in the example file
+that for one or more files. 
+
+Let us use it to see what is in the example file
 `lorem_ipsum.txt`. Assuming you are still in the folder `unix_course-2020-02-14`
 you can call
 
@@ -503,8 +514,9 @@ This is a good time to introduce *standard input* and *standard
 output* and what you can do with them. Stdin is the standard input stream
 and accepts text as input. Stdout is the standard output stream, and as you might expect,
 outputs text. You can redirect the *standard output* into a file by using the `>` operator.
-Let try this to generate a new file that contains
-the combined content of both files:
+
+
+Let try this to generate a new file that contains the combined content of both files:
 
 ```
 $ cat lorem_ipsum.txt lorem_ipsum_2.txtt > lorem_ipsum_combined.txt
@@ -614,7 +626,7 @@ and see if you can understand the output.
 
 `uniq` takes a sorted list of lines returns the uniques. Let's imagine we got a file 
 containing a list of bacterial taxa from our sequencing data. Due to the nature of 16S
-sequencing we will often have mutiple instances with the same taxonomic assignment, and in 
+sequencing we will often have mutiple OTUs with the same taxonomic assignment, and let's say in 
 this case we want to look at the uniques. Have a quick look at `taxa.txt`. Then use `uniq` to generate 
 a non-redundant list of taxa:
 
@@ -622,7 +634,7 @@ a non-redundant list of taxa:
 $ uniq taxa.txt
 ```
 
-If you call `uniq` with `-c` you can count the number of occurrence of each genus
+If you call `uniq` with `-c` you can count the number of occurrences of each taxon
 ```
 $ uniq -c taxa.txt
 ```
@@ -647,7 +659,7 @@ $ grep -c Bacteroidales taxa.txt
 
 The real power of Unix is built on its capability to readily connect tools. 
 For this so-called *pipes* are used. To use the *standard output* of one tool 
-as *standard input* of another command `|` is used. For example, based on what
+as *standard input* of another command we use `|`. For example, based on what
 we just did above, let's say we want to find the unique taxonomic assignments
 within the order Bacteroidales and write this output to a file
 
@@ -655,12 +667,12 @@ within the order Bacteroidales and write this output to a file
 $ grep Bacteroidales taxa.txt | uniq > Bacteroidales.txt
 ```
 
-# Repeating command using the `for` loop
+# Repeating commands using a `for` loop
 
 Now we want to generate a copy of all the text files in your working directory. Running this
 
 ```
-cp *txt copy_of_*txt
+$ cp *txt copy_of_*txt
 ```
 
 would not work.
@@ -696,8 +708,8 @@ echo "Number of lines that contain species":
 wc -l origin_of_species.txt
 ```
 
-Save the file (nano: ctrl-o) as `count_lines.sh`, exit your text editor (nano: ctrl-x) make sure the file `origin_of_species.txt` is in the
-same folder and run the script:
+Save the file (nano: ctrl-o) as `count_lines.sh`, exit your text editor (nano: ctrl-x) make sure the 
+file `origin_of_species.txt` is in the same folder and run the script:
 
 ```
 $ bash count_lines.sh
@@ -710,10 +722,10 @@ Number of lines that contains species:
 15322 origin_of_species.txt
 ```
 
-This a very first shell script. Now we can make it a little more
-flexible. Instead of hard coding (setting this variable within the script itself) 
+This is your very first shell script. Now we can make it a little more
+flexible. Instead of hard coding (*setting this variable within the script itself*) 
 the input file for `wc -l` we want to be able to give this as argument. 
-To do this we change the shell script to:
+To do this we can change the shell script to:
 
 ```
 echo "Number of lines in the given file":
@@ -740,7 +752,7 @@ wc -l $@
 and run it with several input files:
 
 ```
-bash count_lines.sh origin_of_species.txt taxa.txt
+$ bash count_lines.sh origin_of_species.txt taxa.txt
 ```
 
 You should get something like:
@@ -753,15 +765,17 @@ Number of lines in the given file(s):
 ```
 # Useful Example of Shell Scripting
 
-Now we will look at a use for shell scripts that can be really useful for you 
-(**if you are studying the microbiome**). After doing your differential abundance 
-analysis you often want to extract the sequences of the OTUs which were identified 
-as differentially abundant and perhaps check their taxonomy using something like
-BLAST or EZtaxon. This is extremely annoying to do manually and takes a lot of 
-time, but luckily with a bit of BASH magic you can automate this process easily. 
+Now we will look at a use for shell scripts that could be really helpful for you 
+(**especially if you are studying the microbiome**). 
 
-Consider that the headers in a fasta file have a consistent format, and also
-that grep can take a txt file as input (use man to check this), can you think of 
+After doing your differential abundance analysis you often want to extract the 
+sequences of the OTUs which were identified as differentially abundant and perhaps 
+check their taxonomic assignment using something like BLAST or EZtaxon. 
+This is extremely annoying to do manually and can take a lot of time if you have lots of OTUs, 
+but luckily with a bit of BASH magic you can automate this process easily. 
+
+Consider that the headers in a fasta file have a consistent format (i.e. >OTU_4), and also
+that `grep` can take a txt file as input (use man to check this), can you think of 
 a way we could do this? 
 
 
@@ -787,9 +801,11 @@ grep -f $1 -w -A8 $2 >> $3
 </details>
 
 You may notice this prints a couple of extra OTU numbers and this is because the 
-sequences in the FASTA files are not always exactly 8. A better way to do this
+sequences in the FASTA files are not always exactly 8. A better way to do this,
 but much more complicated, would be to make your FASTA file single line before 
 extracting the sequences. 
+
+This is the code I normally use:
 
 ``` 
 echo "enter sequence filename: "
@@ -805,7 +821,7 @@ perl -pe '/^>/ ? print "\n" : chomp' $filename | grep -f $patterns -w -A1 | grep
 # Bonus 
 
 I thought it might also be useful to quickly show an example of a BASH script 
-used for analysis. This is one I wrote to run Salmon on some RNA seq data: 
+used for analysis. This is one I wrote to run [Salmon](https://combine-lab.github.io/salmon/) on some RNA seq data: 
 
 ```
 #!/bin/bash
@@ -828,10 +844,14 @@ Can you understand what it's doing?
 # Useful Links
 
 here are some useful links if you want to learn more about working with 
-the unix shell 
+the unix shell:
+
 http://www.linuxcommand.org/lc3_learning_the_shell.php
+
 https://www.datacamp.com/courses/introduction-to-shell-for-data-science
+
 https://www.bash.academy/
+
 https://www.learnshell.org/
 
 
