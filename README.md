@@ -167,7 +167,8 @@ Topics:
 * `cd`
 * `mkdir`
 * Relative vs. absolute path
-* `~/`
+* `~/` 
+
 
 In this part you will learn how to navigate through the Unix file system.
 
