@@ -150,13 +150,16 @@ to reveal all of the options or just continue typing until the name is unique. P
 * Tab - extend commands and file/folder names
 
 Type the following and press tab to see how it works
+
 ```
 $ ls un
 ```
+
 If you have downloaded the course folder it should auto-complete to: 
 
 ```
 $ ls unix_shell_course-2020-02-14/
+``` 
 
 # Files, folders, locations
 
