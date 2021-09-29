@@ -56,7 +56,7 @@ sudo apt update
 followed by:
 
 ```
-sudo apt install git`
+sudo apt install git
 ```
 then repeat the above command.
 
